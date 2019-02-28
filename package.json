@@ -1,0 +1,25 @@
+{
+  "name": "storeDatabase",
+  "version": "1.0.0",
+  "description": "A Node.js &amp; MySQL run store inventory system database",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lgeoffrion/storeDatabase.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lgeoffrion/storeDatabase/issues"
+  },
+  "homepage": "https://github.com/Lgeoffrion/storeDatabase#readme",
+  "dependencies": {
+    "inquirer": "^6.2.2",
+    "is-number": "^7.0.0",
+    "mysql": "^2.16.0"
+  }
+}
