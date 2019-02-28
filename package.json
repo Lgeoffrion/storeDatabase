@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/Lgeoffrion/storeDatabase#readme",
   "dependencies": {
+    "easy-table": "^1.1.1",
     "inquirer": "^6.2.2",
+    "is-letter": "^1.1.1",
     "is-number": "^7.0.0",
     "mysql": "^2.16.0"
   }
