@@ -11,8 +11,8 @@ var connection = mysql.createConnection({
 });
 
 
-//display items for sale
-function start() {
+//display items for sale by query from mySQL server
+function start() {  
     var query = "SELECT * FROM products";
     connection.query(query, function (err, res) {
         console.log("            -----=====Welcome to Bamazon!=====-----\n");
@@ -22,7 +22,7 @@ function start() {
                 + res[i].price + "  |   Quantity Left: " + res[i].stock + "\n");
         }
 
-        inquirer
+        inquirer //prompt questions for purchase
             .prompt([{
                 name: "id",
                 type: "input",
@@ -48,6 +48,7 @@ function start() {
                 }
             }])
             .then(function (answer) {
+                //setting variables for following functions
                 var itemToPuchase = (answer.id) - 1;
                 var howMany = parseInt(answer.quantity);
                 var totalCost = parseFloat((res[itemToPuchase].price) * howMany);
@@ -58,7 +59,7 @@ function start() {
                     message: "Your Total is $" + totalCost + ". Confirm your purchase?",
                 })
                 .then(function (answer2) {
-                    //function to change database numbers        
+                    //function to change database numbers if purchase is confirmed and enough stock      
                     if (answer2.confirmPurchase === true && res[itemToPuchase].stock >= howMany) {
                         //after purchase, updates quantity in Products
                         connection.query("UPDATE products SET ? WHERE ?", [
@@ -70,10 +71,12 @@ function start() {
                             reprompt();
                         })
                     }
+                    //if they dont confirm purchase
                     else if(answer2.confirmPurchase === false){
                         console.log ("Your order has been canceled.\n")
                         reprompt();
                     }
+                    //error if not enough stock for purchase
                     else {
                         console.log("Sorry, there's not enough in stock! Please try again.\n");
                         reprompt();
@@ -84,6 +87,7 @@ function start() {
     });
 }
 
+//function to send user to beginning again or end program
 function reprompt() {
     inquirer.prompt([{
         type: "confirm",
